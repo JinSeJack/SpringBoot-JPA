@@ -8,7 +8,6 @@ import org.springframework.context.annotation.ComponentScan;
  * SpringBootApplication标签可以自动扫描所在包以及子包下的文件
  */
 @SpringBootApplication
-@ComponentScan("com.ibike")
 public class GovernApplication {
 
 	public static void main(String[] args) {

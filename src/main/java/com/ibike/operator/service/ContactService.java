@@ -2,7 +2,6 @@ package com.ibike.operator.service;
 
 import com.ibike.operator.domain.Contact;
 import com.ibike.operator.repository.ContactRepository;
-import com.ibike.operator.repository.OperatorRepository;
 import com.ibike.support.jpa.JpaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +28,17 @@ public class ContactService implements JpaService<ContactRepository> {
 
     public void save(Contact contact) {
         contactRepository.save(contact);
+    }
+
+    public void delete(int id){
+        contactRepository.deleteById(id);
+    }
+
+    public void delete(Contact c){
+        contactRepository.delete(c);
+    }
+
+    public Contact getById(int id){
+         return contactRepository.getContactById(id);
     }
 }

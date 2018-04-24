@@ -13,4 +13,6 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
      * 此时可以通过maven install命令来定位错误
      */
     List<Contact> findAllContractByOperatorId(int id);
+
+    Contact getContactById(int id);
 }

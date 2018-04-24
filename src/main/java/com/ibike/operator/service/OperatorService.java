@@ -37,4 +37,21 @@ import java.util.List;
         return operatorRepository.setOperatorDeposit(deposit, id);
     }
 
+    public void updateDeposit(int depositId) {
+        //operatorRepository.updateDeposit(depositId);
+    }
+
+    public void save(Operator o) {
+        operatorRepository.save(o);
+    }
+
+    public void updatePoint(String operatorName, double point) {
+        Operator o = operatorRepository.getByName(operatorName);
+        o.setCredit(o.getCredit() + point);
+        operatorRepository.save(o);
+    }
+
+    public List<Operator> findRunningOp(int i) {
+        return operatorRepository.findAllRunning(i);
+    }
 }

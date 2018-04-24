@@ -1,4 +1,4 @@
-package com.ibike.controller;
+package com.ibike.operator.controller;
 
 import com.ibike.operator.domain.Contact;
 import com.ibike.operator.domain.Operator;
@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
+@RequestMapping(value = "/contact")
 public class ContactController {
 
     @Autowired
@@ -24,8 +25,12 @@ public class ContactController {
     @RequestMapping(value = "/getOpCont/{operatorId}")
     public List<Contact> getContract(@PathVariable int operatorId){
 
-        List<Contact> contacts = contactService.findAllContractByOperatorId(operatorId);
+        List<Contact> contacts = null;
+        try {
+            contacts = contactService.findAllContractByOperatorId(operatorId);
+        }catch (Exception e){
 
+        }
         return contacts;
     }
 
@@ -35,6 +40,28 @@ public class ContactController {
         try{
             Operator operator = operatorService.findById(id);
             contactService.save(new Contact(name, LocalDateTime.now(), LocalDateTime.now(), phone, operator, type, 0));
+        }catch (Exception e){
+            return e.toString();
+        }
+        return "add successfully";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public String delete(@PathVariable int id){
+        try{
+            contactService.delete(id);
+        }catch (Exception e){
+            return e.toString();
+        }
+        return "add successfully";
+    }
+
+    @RequestMapping(value = "/check/{id}")
+    public String check(@PathVariable int id){
+        try{
+            Contact c = contactService.getById(id);
+            c.setIsChecked(1);
+            contactService.save(c);
         }catch (Exception e){
             return e.toString();
         }
